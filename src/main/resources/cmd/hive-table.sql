@@ -1,0 +1,75 @@
+add jar s3://tcl-bj-hdfs/af-verify/af_ceo/hive-demo.jar;
+
+ALTER TABLE af_ceo ADD PARTITION (dt='2017-03-22');
+
+
+CREATE EXTERNAL TABLE af_ceo(
+device_model string, 
+fb_adgroup_id string,
+click_time_selected_timezone string,
+download_time_selected_timezone string, 
+download_time string,
+operator string,
+af_keywords string,
+attributed_touch_time string,
+click_time string,
+agency string,
+ip string,
+cost_per_install string,
+fb_campaign_id string,
+imei string,
+is_retargeting string,
+app_name string,
+re_targeting_conversion_type string,
+android_id string,
+city string,
+af_sub1 string,
+af_sub2 string,
+af_sub3 string,
+af_sub4 string,
+af_sub5 string,
+event_value string,
+fb_adset_name string,
+customer_user_id string,
+mac string,
+install_time_selected_timezone string,
+campaign string,
+af_adset string,
+af_adset_id string,
+event_name string,
+event_time_selected_timezone string,
+currency string,
+install_time string,
+fb_adgroup_name string,
+attributed_touch_type string,
+event_time string,
+platform string,
+sdk_version string,
+appsflyer_device_id string,
+selected_currency string,
+wifi string,
+advertising_id string,
+media_source string,
+country_code string,
+http_referrer string,
+fb_campaign_name string,
+bundle_id string,
+click_url string,
+carrier string,
+language string,
+app_id string,
+app_version string,
+attribution_type string,
+af_siteid string,
+os_version string,
+fb_adset_id string,
+device_brand string,
+revenue_in_selected_currency string,
+event_type string
+) 
+PARTITIONED BY (dt string)
+ROW FORMAT SERDE 'com.test.JsonSerde'
+STORED AS 
+INPUTFORMAT 'com.hadoop.mapred.DeprecatedLzoTextInputFormat' 
+OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION 's3://tcl-bj-hdfs/logs/af/';
